@@ -527,7 +527,7 @@ function getScores(){
 			document.getElementById("scoreBoard").innerHTML=xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("GET","../db/Leaderboards.php?op=getGameScores&gameID=1",true);
+	xmlhttp.open("GET","db/Leaderboards.php?op=getGameScores&gameID=1",true);
 	xmlhttp.send(); /**/
 }
 
@@ -543,7 +543,7 @@ function sendScore(){
 			//document.getElementById("scoreBoard").innerHTML=xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("GET","../db/Leaderboards.php?op=setScore&username="+user+"&gameID=1&score="+score,true);
+	xmlhttp.open("GET","db/Leaderboards.php?op=setScore&username="+user+"&gameID=1&score="+score,true);
 	xmlhttp.send(); /**/
 }
 
