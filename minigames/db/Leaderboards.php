@@ -29,37 +29,38 @@ $operation = $_GET['op'];
 
 if ( $operation == 'setScore' )
 {
-    setScore( $_GET['username'], $_GET['gameID'], $_GET['score'] );
+    echo setScore( $_GET['username'], $_GET['gameID'], $_GET['score'] );
 }
 else if ( $operation == 'getScore' )
 {
-    getScore( $_GET['username'], $_GET['gameID'] );
+    echo getScore( $_GET['username'], $_GET['gameID'] );
 }
 else if ( $operation == 'getGameScores' )
 {
-    getGameScores( $_GET['gameID'] ); 
+    echo getGameScores( $_GET['gameID'] ); 
 }
 else if ( $operation == 'getNameScores' )
 {
-    getUserScores( $_GET['username'] );
+    echo getUserScores( $_GET['username'] );
 }
 else if ( $operation == 'deleteUser' )
 {
-    deleteUser( $_GET['username'] );
+    echo deleteUser( $_GET['username'] );
 }
 else if ( $operation == 'createTable' )
 {
-    createTable();
+    echo createTable();
 }
 
 // updates a user's score, replacing any old score for the same game
 function setScore( $username, $gameID, $score )
 {
+    if ( !(getScore( $username, $gameID ) < $score) ) { return 0; }
     $query= "REPLACE INTO highscores (username, gameID, score)
              VALUES ('$username', '$gameID', '$score')";
     $result = mysql_query( $query );
     if (!$result) { die( mysql_error() ); }
-    echo $result;
+    return $result;
 }
 
 // returns the recorded score of the given user for the given game
@@ -69,7 +70,7 @@ function getScore( $username, $gameID )
               WHERE username='$username' AND gameID='$gameID'";
     $result = mysql_query( $query );
     if (!$result) { die( mysql_error() ); }
-    echo mysql_result( $result, 0, 'score' );
+    return mysql_result( $result, 0, 'score' );
 }
 
 // gets all recorded scores for the given game, one per line, in descending
@@ -86,7 +87,7 @@ function getGameScores( $gameID )
     {
         $output .= $row['username'] . "," . $row['score'] . "<br />";
     }
-    echo $output;
+    return $output;
 }
 
 // gets all the scores associated with one user, one per line, with the form
@@ -102,7 +103,7 @@ function getUserScores( $username )
     {
         $output .= $rot['gameID'] . "," . $row['score'] . "<br />";
     }
-    echo $output;
+    return $output;
 }
 
 // deletes all score entries for a username
@@ -112,7 +113,7 @@ function deleteUser( $username )
               WHERE username='$username'";
     $result = mysql_query( $query );
     if (!$result) { die( mysql_error() ); }
-    echo $result;
+    return $result;
 }
 
 // creates the highscore table
@@ -126,7 +127,7 @@ function createTable()
               )";
     $result = mysql_query( $query );
     if (!$result) { die( mysql_error() ); }
-    echo $result;
+    return $result;
 }
 
 ?>
