@@ -1,6 +1,5 @@
 <?php
 
-//
 // Leaderboards.php
 // 
 // Required files: config.php
@@ -9,15 +8,6 @@
 //      /Leaderboards.php?op=deleteUser&username=Glados
 //      /Leaderboards.php?op=getScore&username=DeckardCain&gameID=theGame
 //      /Leaderboards.php?op=setScore&username=Me&gameID=theGame&score=1000
-//
-// Table used:
-// CREATE TABLE highscores (
-//     username varchar(20),
-//     gameID varchar(50),
-//     score int,
-//     PRIMARY KEY (username,gameID)
-// )
-//
 
 include_once('config.php');
 
@@ -29,33 +19,33 @@ $operation = $_GET['op'];
 
 if ( $operation == 'setScore' )
 {
-    echo setScore( $_GET['username'], $_GET['gameID'], $_GET['score'] );
+    echo set_score( $_GET['username'], $_GET['gameID'], $_GET['score'] );
 }
 else if ( $operation == 'getScore' )
 {
-    echo getScore( $_GET['username'], $_GET['gameID'] );
+    echo get_score( $_GET['username'], $_GET['gameID'] );
 }
 else if ( $operation == 'getGameScores' )
 {
-    echo getGameScores( $_GET['gameID'] ); 
+    echo get_game_scores( $_GET['gameID'] ); 
 }
 else if ( $operation == 'getNameScores' )
 {
-    echo getUserScores( $_GET['username'] );
+    echo get_user_scores( $_GET['username'] );
 }
 else if ( $operation == 'deleteUser' )
 {
-    echo deleteUser( $_GET['username'] );
+    echo delete_user( $_GET['username'] );
 }
 else if ( $operation == 'createTable' )
 {
-    echo createTable();
+    echo create_table();
 }
 
 // updates a user's score, replacing any old score for the same game
-function setScore( $username, $gameID, $score )
+function set_score( $username, $gameID, $score )
 {
-    if ( !(getScore( $username, $gameID ) < $score) ) { return 0; }
+    if ( !(get_score( $username, $gameID ) < $score) ) { return 0; }
     $query= "REPLACE INTO highscores (username, gameID, score)
              VALUES ('$username', '$gameID', '$score')";
     $result = mysql_query( $query );
@@ -64,7 +54,7 @@ function setScore( $username, $gameID, $score )
 }
 
 // returns the recorded score of the given user for the given game
-function getScore( $username, $gameID )
+function get_score( $username, $gameID )
 {
     $query = "SELECT * FROM highscores
               WHERE username='$username' AND gameID='$gameID'";
@@ -75,7 +65,7 @@ function getScore( $username, $gameID )
 
 // gets all recorded scores for the given game, one per line, in descending
 // order, in the format <name>,<score>
-function getGameScores( $gameID )
+function get_game_scores( $gameID )
 {
     $query = "SELECT * FROM highscores
               WHERE gameID = '$gameID'
@@ -92,7 +82,7 @@ function getGameScores( $gameID )
 
 // gets all the scores associated with one user, one per line, with the form
 // <gameID>,<score>
-function getUserScores( $username )
+function get_user_scores( $username )
 {
     $query = "SELECT * FROM highscores
               WHERE username='$username'";
@@ -107,7 +97,7 @@ function getUserScores( $username )
 }
 
 // deletes all score entries for a username
-function deleteUser( $username )
+function delete_user( $username )
 {
     $query = "DELETE FROM highscores
               WHERE username='$username'";
@@ -117,7 +107,7 @@ function deleteUser( $username )
 }
 
 // creates the highscore table
-function createTable()
+function create_table()
 {
     $query = "CREATE TABLE highscores (
                   username varchar(20),

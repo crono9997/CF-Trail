@@ -1,6 +1,6 @@
 <?php
 
-// User.php
+// Users.php
 //
 // Required files: DBConnect.php, config.php
 //
@@ -26,6 +26,10 @@ else if ( $operation == 'userExists' )
 else if ( $operation == 'isCorrectPassword' )
 {
     echo is_correct_password( $_GET['username'], $_GET['password'] );
+}
+else if ( $operation == 'deleteUser' )
+{
+    echo delete_user( $_GET['username'] );
 }
 else if ( $operation == 'createTable' )
 {
@@ -64,6 +68,16 @@ function user_exists( $username )
     if (!$result) { die( mysql_error() ); }
     if ( mysql_num_rows( $result ) != 0 ) { return 1; }
     else { return 0; }
+}
+
+// removes login information about a user from the database
+function delete_user( $username )
+{
+    $query = "DELETE FROM users
+              WHERE username='$username'";
+    $result = mysql_query( $query );
+    if (!$result) { die( mysql_error() ); }
+    return $result;
 }
 
 // returns a 32-character string hashed from the given password (using md5)
