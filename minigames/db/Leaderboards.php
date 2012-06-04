@@ -2,18 +2,14 @@
 
 // Leaderboards.php
 // 
-// Required files: config.php
+// Required files: DBConnect.php, config.php
 //
 // Samples (using $_GET for dev):
 //      /Leaderboards.php?op=deleteUser&username=Glados
 //      /Leaderboards.php?op=getScore&username=DeckardCain&gameID=theGame
 //      /Leaderboards.php?op=setScore&username=Me&gameID=theGame&score=1000
 
-include_once('config.php');
-
-$con = mysql_connect( $host, $user, $password );
-if (!$con) { die( "Unable to establish connection with server." ); }
-@mysql_select_db( $database ) or die( "Unable to select database." );
+include_once('DBConnect.php');
 
 $operation = $_GET['op'];
 
