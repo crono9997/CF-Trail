@@ -12,30 +12,49 @@
 include_once('DBConnect.php');
 
 $operation = $_GET['op'];
+$username = $_GET['username'];
+$gameID = $_GET['gameID'];
+$score = $_GET['score'];
 
-if ( $operation == 'setScore' )
+if ( $operation == 'scoreExists' )
 {
-    echo set_score( $_GET['username'], $_GET['gameID'], $_GET['score'] );
+    echo score_exists( $username, $gameID );
+}
+else if ( $operation == 'setScore' )
+{
+    echo set_score( $username, $gameID, $score );
 }
 else if ( $operation == 'getScore' )
 {
-    echo get_score( $_GET['username'], $_GET['gameID'] );
+    echo get_score( $username, $gameID );
 }
 else if ( $operation == 'getGameScores' )
 {
-    echo get_game_scores( $_GET['gameID'] ); 
+    echo get_game_scores( $gameID ); 
 }
 else if ( $operation == 'getNameScores' )
 {
-    echo get_user_scores( $_GET['username'] );
+    echo get_user_scores( $username );
 }
 else if ( $operation == 'deleteUser' )
 {
-    echo delete_user( $_GET['username'] );
+    echo delete_user( $username );
 }
 else if ( $operation == 'createTable' )
 {
     echo create_table();
+}
+
+// returns 1 if the given user has a score recorded for the given gameID, 0
+// otherwise
+function score_exists( $username, $gameID )
+{
+    $query = "SELECT * FROM highscores
+              WHERE username='$username' AND gameID='$gameID'";
+    $result = mysql_query( $query );
+    if (!$result) { die( mysql_error() ); }
+    if ( mysql_num_rows( $result ) != 0 ) { return 1; }
+    else { return 0; }
 }
 
 // updates a user's score, replacing any old score for the same game
