@@ -1,5 +1,6 @@
 <?php
 
+//
 // Leaderboards.php
 // 
 // Required files: DBConnect.php, config.php
