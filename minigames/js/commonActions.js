@@ -42,6 +42,13 @@ function getMousePos(canvas, evt){
     };
 }
 
+//Restricts a variable to a low and high limit
+function clamp(val,low,high){
+	if(val<low)val = low;
+	else if(val>high)val = high;
+	return val;
+}
+
 //Returns distance betweem two points
 function distance(x1, y1, x2, y2){
 	return Math.sqrt(((x2-x1)*(x2-x1))+((y2-y1)*(y2-y1)));
