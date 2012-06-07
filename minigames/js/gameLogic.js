@@ -9,16 +9,16 @@ ctx.fillRect(0,  0, canvasWidth, canvasHeight);
 var blankImageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
 
 require([
-			"commonActions",
-			"Sprite",
-			"Particle",
-			"StarParticle",
-			"FadingParticle",
-			"Bullet",
-			"Enemy",
-            "UFO",
-            "Diver",
-			"Squirm"
+			"js/commonActions",
+			"js/Sprite",
+			"js/Particle",
+			"js/StarParticle",
+			"js/FadingParticle",
+			"js/Bullet",
+			"js/Enemy",
+            		"js/UFO",
+            		"js/Diver",
+			"js/Squirm"
 			
         ], function(){
            filesLoaded();
@@ -455,7 +455,7 @@ function oRetry(){
 }
 
 function getScores(){
-	if (window.XMLHttpRequest){
+	/*if (window.XMLHttpRequest){
 		xmlhttp=new XMLHttpRequest();
 	}else{
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
@@ -469,11 +469,11 @@ function getScores(){
 	xmlhttp.open("POST","db/Leaderboards.php?op=getGameScores&gameID=1",true);
 	
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp.send(params);
+	xmlhttp.send(params);*/
 }
 
 function sendScore(){
-	if (window.XMLHttpRequest){
+	/*if (window.XMLHttpRequest){
 		xmlhttp=new XMLHttpRequest();
 	}else{
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
@@ -487,7 +487,7 @@ function sendScore(){
 	xmlhttp.open("POST","db/Leaderboards.php",true);
 
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp.send(params);
+	xmlhttp.send(params);*/
 }
 
 function preventBackspaceHandler(evt) {
