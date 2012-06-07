@@ -4,19 +4,22 @@
 //
 // Required files: DBConnect.php, config.php
 //
-// Examples (using $_GET for dev):
-//      /SavedGames.php?op=getSave&username=Matt
-//      /SavedGames.php?op=saveGame&username=Matt&progress=1
-//
 // Note: I figure since the minigames will be sequential, a progress of 1 will
 // refer to someone who has beaten the first minigame, 2 for someone who has
 // beaten the second minigame, etc.
+//
+// <operation> - [ required variables ]
+//  saveExists - username
+//  getSave - username
+//  saveGame - username, progress
+//  deleteSave - username
+//  createTable - 
 
 include_once( 'DBConnect.php' );
 
-$operation = $_GET['op'];
-$username = $_GET['username'];
-$progress = $_GET['progress'];
+$operation = $_POST['op'];
+$username = $_POST['username'];
+$progress = $_POST['progress'];
 
 if ( $operation == 'saveExists' )
 {

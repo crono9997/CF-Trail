@@ -5,31 +5,35 @@
 // Required files: DBConnect.php, config.php
 //
 // Password is hashed using md5. Raw password is never stored.
-//
-// Examples ($_GET used for dev):
-//      Users.php?op=userExists&username=Bob
-//      Users.php?op=setPassword&username=Bob&password=TheBuilder
-//      Users.php?op=isCorrectPassword&username=Bob&password=wrongpassword
+// 
+// <operation> - [ required variables ]
+//  userExists - username
+//  setPassword - username, password
+//  isCorrectPassword - username, password
+//  deleteUser - username
+//  createTable - 
 
 include_once( 'DBConnect.php' );
 
-$operation = $_GET['op'];
+$operation = $_POST['op'];
+$username = $_POST['username'];
+$password = $_POST['password'];
 
 if ( $operation == 'setPassword' )
 {
-    echo set_password( $_GET['username'], $_GET['password'] );
+    echo set_password( $username, $password );
 }
 else if ( $operation == 'userExists' )
 {
-    echo user_exists( $_GET['username'] );
+    echo user_exists( $username );
 }
 else if ( $operation == 'isCorrectPassword' )
 {
-    echo is_correct_password( $_GET['username'], $_GET['password'] );
+    echo is_correct_password( $username, $password);
 }
 else if ( $operation == 'deleteUser' )
 {
-    echo delete_user( $_GET['username'] );
+    echo delete_user( $username );
 }
 else if ( $operation == 'createTable' )
 {

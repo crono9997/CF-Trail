@@ -4,17 +4,21 @@
 // 
 // Required files: DBConnect.php, config.php
 //
-// Samples (using $_GET for dev):
-//      /Leaderboards.php?op=deleteUser&username=Glados
-//      /Leaderboards.php?op=getScore&username=DeckardCain&gameID=theGame
-//      /Leaderboards.php?op=setScore&username=Me&gameID=theGame&score=1000
+// <operation> - [ required variables ]
+//  scoreExists - username, gameID
+//  setScore - username, gameID, score
+//  getScore - username, gameID
+//  getGameScores - gameID
+//  getUserScores - username
+//  deleteUser - username
+//  createTable - 
 
 include_once('DBConnect.php');
 
-$operation = $_GET['op'];
-$username = $_GET['username'];
-$gameID = $_GET['gameID'];
-$score = $_GET['score'];
+$operation = $_POST['op'];
+$username = $_POST['username'];
+$gameID = $_POST['gameID'];
+$score = $_POST['score'];
 
 if ( $operation == 'scoreExists' )
 {
