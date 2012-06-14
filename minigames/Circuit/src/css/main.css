@@ -1,0 +1,7 @@
+#bgcanvas { background:url("../../media/circuitboard_medium.jpg");
+    height: 701px; width: 1000px; }
+#maincanvas { height: 500px; width: 500px;
+    position: absolute; top: 58px; left: 59px; }
+
+#game_msg_shadow { font-size: 100px; font-style: bold; position: relative;
+                   top: -50px; left: 60px; color: white; }

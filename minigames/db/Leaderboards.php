@@ -69,7 +69,9 @@ function score_exists( $username, $gameID )
 // updates a user's score, replacing any old score for the same game
 function set_score( $username, $gameID, $score )
 {
-    if ( !(get_score( $username, $gameID ) < $score) ) { return; }
+    $scoreArray = json_decode( get_score( $username, $gameID ), TRUE );
+    $prevscore = $scoreArray['score'];
+    if ( $prevscore >= $score) ) { return; }
     $query= sprintf( "REPLACE INTO highscores (username, gameID, score)
              VALUES ('%s', '%s', '%s')",
              mysql_real_escape_string($username),
